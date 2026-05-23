@@ -177,7 +177,7 @@ body {
 
   font-family: 'Baskerville Display PT', 'Libre Baskerville', 'Baskerville', Georgia, serif;
   font-weight: 700;
-  font-size: var(--name-size, 30px);
+  font-size: var(--name-size, 3.06cqi);
   color: #2e5033;
   text-transform: uppercase;
   white-space: nowrap;
@@ -192,7 +192,7 @@ body {
 
   font-family: 'Libre Baskerville', 'Baskerville', Georgia, serif;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1.53cqi;
   color: #ffffff !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -315,7 +315,9 @@ var nameSize = 30;
 function changeSize(delta) {
   if (delta === 0) { nameSize = 30; }
   else { nameSize = Math.min(60, Math.max(8, nameSize + delta)); }
-  document.querySelector('.cert-wrap').style.setProperty('--name-size', nameSize + 'px');
+  // 30px was designed for 980px wide container → 30/980*100 = 3.06cqi
+  var cqi = (nameSize / 980 * 100).toFixed(3);
+  document.querySelector('.cert-wrap').style.setProperty('--name-size', cqi + 'cqi');
   document.getElementById('sizeVal').textContent = nameSize + ' px';
 }
 
