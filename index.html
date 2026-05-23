@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>B2 Management – Umra Yo'llanmasi</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -201,6 +201,38 @@ body {
 }
 
 .cert-wrap { container-type: inline-size; }
+
+/* ── MOBILE ──────────────────────────── */
+@media (max-width: 600px) {
+  body { padding: 12px 10px 28px; }
+
+  .panel { padding: 18px 14px; border-radius: 12px; }
+
+  .ph { gap: 10px; margin-bottom: 14px; padding-bottom: 14px; }
+  .ph-logo { height: 38px; }
+  .ph h1 { font-size: 15px; }
+  .ph p  { font-size: 11px; }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px; margin-bottom: 12px;
+  }
+
+  .fg input { padding: 11px 12px; font-size: 15px; }
+
+  .size-row { gap: 8px; margin-bottom: 14px; }
+  .btn-sz { padding: 7px 12px; font-size: 13px; }
+  #sizeVal { font-size: 13px; min-width: 34px; }
+
+  .btn { height: 50px; font-size: 14px; border-radius: 12px; }
+  .btn-icon { width: 30px !important; height: 30px !important; border-radius: 7px !important; }
+  .btn-label span { font-size: 12px; }
+  .btn-label small { font-size: 10px; }
+
+  .tip { font-size: 11px; margin-top: 14px; }
+
+  .cert-outer { border-radius: 8px; }
+}
 
 /* ── PRINT ───────────────────────────── */
 @media print {
