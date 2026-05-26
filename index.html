@@ -339,11 +339,12 @@ function changeSize(delta) {
 function buildCanvas(callback) {
   var nameText = document.getElementById('certName').textContent.trim() || 'SERTIFIKAT';
   var yearText = document.getElementById('certYear').textContent.trim() || '2026';
-  var displayW = document.querySelector('.cert-wrap').offsetWidth;
 
-  var imgW = displayW * 2;
+  // Fixed high-res canvas — independent of screen size
+  var imgW = 3500;
   var imgH = Math.round(imgW * 4419 / 6250);
-  var scale = imgW / displayW;
+  // 980 is the design reference width (max-width of .cert-outer)
+  var scale = imgW / 980;
 
   var canvas = document.createElement('canvas');
   canvas.width  = imgW;
