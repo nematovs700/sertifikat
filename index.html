@@ -281,18 +281,32 @@ body {
     <button class="btn-sz btn-sz-reset" onclick="changeSize(0)">↺ 30px</button>
   </div>
 
-  <button class="btn btn-pdf" onclick="downloadPdf()" style="width:100%" id="pdfBtn">
-    <div class="btn-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.3">
-        <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
-        <rect x="6" y="14" width="12" height="8"/>
-      </svg>
-    </div>
-    <div class="btn-label">
-      <span>PDF saqlash</span>
-      <small id="pdfTip">To'g'ridan-to'g'ri yuklab olish</small>
-    </div>
-  </button>
+  <div class="btn-group">
+    <button class="btn btn-png" onclick="downloadPng()">
+      <div class="btn-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.3">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+      <div class="btn-label">
+        <span>PNG saqlash</span>
+        <small>Rasm formatida</small>
+      </div>
+    </button>
+    <button class="btn btn-pdf" onclick="downloadPdf()" id="pdfBtn">
+      <div class="btn-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.3">
+          <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+      </div>
+      <div class="btn-label">
+        <span>PDF saqlash</span>
+        <small id="pdfTip">To'g'ridan-to'g'ri yuklab olish</small>
+      </div>
+    </button>
+  </div>
   <p class="tip" id="dlTip"></p>
 </div>
 
