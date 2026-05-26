@@ -347,7 +347,7 @@ function buildCanvas(callback) {
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
     try { ctx.letterSpacing = Math.round(namePx * 0.18) + 'px'; } catch(e) {}
-    ctx.fillText(nameText, imgW / 2, imgH * 0.33 + namePx * 0.6);
+    ctx.fillText(nameText.toUpperCase(), imgW / 2, imgH * 0.33 + namePx * 0.6);
     ctx.restore();
 
     var yearPx = Math.round(15 * scale);
