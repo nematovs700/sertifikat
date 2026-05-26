@@ -205,32 +205,42 @@ body {
 
 /* ── MOBILE ──────────────────────────── */
 @media (max-width: 600px) {
-  body { padding: 12px 10px 28px; }
+  body { padding: 10px 8px 24px; }
 
-  .panel { padding: 18px 14px; border-radius: 12px; }
+  .panel { padding: 16px 14px; border-radius: 14px; margin-bottom: 14px; }
 
-  .ph { gap: 10px; margin-bottom: 14px; padding-bottom: 14px; }
-  .ph-logo { height: 38px; }
-  .ph h1 { font-size: 15px; }
+  .ph { gap: 10px; margin-bottom: 14px; padding-bottom: 12px; }
+  .ph-logo { height: 36px; }
+  .ph h1 { font-size: 14px; line-height: 1.3; }
   .ph p  { font-size: 11px; }
 
   .form-row {
     grid-template-columns: 1fr;
-    gap: 12px; margin-bottom: 12px;
+    gap: 10px; margin-bottom: 10px;
   }
+  .fg label { font-size: 11px; margin-bottom: 6px; }
+  .fg input { padding: 12px 12px; font-size: 15px; border-radius: 9px; }
 
-  .fg input { padding: 11px 12px; font-size: 15px; }
+  /* Size row: label full width, buttons stretch */
+  .size-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .size-row label { grid-column: 1 / -1; font-size: 11px; margin-bottom: 0; }
+  .btn-sz { padding: 9px 10px; font-size: 13px; text-align: center; }
+  #sizeVal { font-size: 13px; min-width: 44px; }
 
-  .size-row { gap: 8px; margin-bottom: 14px; }
-  .btn-sz { padding: 7px 12px; font-size: 13px; }
-  #sizeVal { font-size: 13px; min-width: 34px; }
+  /* Stack download buttons vertically */
+  .btn-group { grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
+  .btn { height: 54px; font-size: 15px; border-radius: 13px; gap: 12px; }
+  .btn-icon { width: 34px !important; height: 34px !important; border-radius: 8px !important; }
+  .btn-label span { font-size: 13px; }
+  .btn-label small { font-size: 11px; }
 
-  .btn { height: 50px; font-size: 14px; border-radius: 12px; }
-  .btn-icon { width: 30px !important; height: 30px !important; border-radius: 7px !important; }
-  .btn-label span { font-size: 12px; }
-  .btn-label small { font-size: 10px; }
-
-  .tip { font-size: 11px; margin-top: 14px; }
+  .tip { font-size: 11px; margin-top: 8px; }
 
   .cert-outer { border-radius: 8px; }
 }
