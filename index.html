@@ -47,13 +47,17 @@ body {
   display: block; font-size: 12px; font-weight: 700; color: #555;
   text-transform: uppercase; letter-spacing: .7px; margin-bottom: 8px;
 }
-.fg input {
+.fg input, .fg textarea {
   width: 100%; padding: 13px 16px;
   border: 2px solid #e0e0e0; border-radius: 10px;
   font-size: 16px; font-family: inherit; color: #222;
   background: #fafafa; transition: .2s;
 }
-.fg input:focus {
+.fg textarea {
+  resize: none; line-height: 1.5;
+  min-height: 70px;
+}
+.fg input:focus, .fg textarea:focus {
   outline: none; border-color: #1B5E20;
   box-shadow: 0 0 0 4px rgba(27,94,32,.1);
   background: white;
@@ -159,14 +163,16 @@ body {
   top: 33%;
   left: 0; right: 0;
   text-align: center;
+  transform: translateY(-50%);
 
   font-family: 'Baskerville Display PT', 'Libre Baskerville', 'Baskerville', Georgia, serif;
   font-weight: 700;
   font-size: var(--name-size, 3.06cqi);
   color: #2e5033;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: pre;
   letter-spacing: 0.07em;
+  line-height: 1.35;
 }
 
 .ov-year {
@@ -255,10 +261,10 @@ body {
 
   <div class="form-row">
     <div class="fg">
-      <label>Mijoz ismi (to'liq — katta harflarda)</label>
-      <input type="text" id="nameInput" value="NEMATOV AMR"
+      <label>Mijoz ismi (to'liq — katta harflarda, Enter — yangi qator)</label>
+      <textarea id="nameInput" rows="2"
              placeholder="FAMILIYA ISM OTASINING ISMI"
-             oninput="document.getElementById('certName').textContent = this.value || 'FAMILIYA ISM'">
+             oninput="updateName(this.value)">NEMATOV AMR</textarea>
     </div>
     <div class="fg">
       <label>Yil</label>
@@ -309,23 +315,25 @@ body {
 <script>
 var nameSize = 30;
 
+function updateName(val) {
+  document.getElementById('certName').textContent = val.toUpperCase() || 'FAMILIYA ISM';
+}
+
 function changeSize(delta) {
   if (delta === 0) { nameSize = 30; }
   else { nameSize = Math.min(60, Math.max(8, nameSize + delta)); }
-  // 30px was designed for 980px wide container → 30/980*100 = 3.06cqi
   var cqi = (nameSize / 980 * 100).toFixed(3);
   document.querySelector('.cert-wrap').style.setProperty('--name-size', cqi + 'cqi');
   document.getElementById('sizeVal').textContent = nameSize + ' px';
 }
 
 function buildCanvas(callback) {
-  var nameText = document.getElementById('certName').textContent.trim() || 'SERTIFIKAT';
+  var rawText = document.getElementById('nameInput').value.trim() || 'SERTIFIKAT';
+  var lines   = rawText.toUpperCase().split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
   var yearText = document.getElementById('certYear').textContent.trim() || '2026';
 
-  // Fixed high-res canvas — independent of screen size
   var imgW = 3500;
   var imgH = Math.round(imgW * 4419 / 6250);
-  // 980 is the design reference width (max-width of .cert-outer)
   var scale = imgW / 980;
 
   var canvas = document.createElement('canvas');
@@ -337,14 +345,21 @@ function buildCanvas(callback) {
   bg.onload = function() {
     ctx.drawImage(bg, 0, 0, imgW, imgH);
 
-    var namePx = Math.round(nameSize * scale);
+    var namePx   = Math.round(nameSize * scale);
+    var lineH    = Math.round(namePx * 1.35);
+    var totalH   = lineH * lines.length;
+    var centerY  = imgH * 0.33;
+    var startY   = centerY - totalH / 2 + namePx / 2;
+
     ctx.save();
     ctx.font         = 'bold ' + namePx + 'px "Baskerville Display PT","Libre Baskerville",Georgia,serif';
     ctx.fillStyle    = '#2e5033';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    try { ctx.letterSpacing = Math.round(namePx * 0.18) + 'px'; } catch(e) {}
-    ctx.fillText(nameText.toUpperCase(), imgW / 2, imgH * 0.33 + namePx * 0.6);
+    try { ctx.letterSpacing = Math.round(namePx * 0.07) + 'px'; } catch(e) {}
+    lines.forEach(function(line, i) {
+      ctx.fillText(line, imgW / 2, startY + i * lineH);
+    });
     ctx.restore();
 
     var yearPx = Math.round(15 * scale);
@@ -357,7 +372,7 @@ function buildCanvas(callback) {
     ctx.fillText(yearText, imgW * 0.387, imgH * 0.925);
     ctx.restore();
 
-    callback(canvas, nameText);
+    callback(canvas, lines[0] || 'SERTIFIKAT');
   };
   bg.onerror = function() {
     document.getElementById('dlTip').textContent = '❌ certificate-bg.png topilmadi.';
