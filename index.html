@@ -160,7 +160,7 @@ body {
 
 .ov-name {
   position: absolute;
-  top: 33%;
+  top: 36%;
   left: 0; right: 0;
   text-align: center;
   transform: translateY(-50%);
@@ -316,7 +316,10 @@ body {
 var nameSize = 30;
 
 function updateName(val) {
-  document.getElementById('certName').textContent = val.toUpperCase() || 'FAMILIYA ISM';
+  var upper = val.toUpperCase() || 'FAMILIYA ISM';
+  document.getElementById('certName').textContent = upper;
+  var lines = upper.split('\n').filter(function(l){ return l.trim(); }).length;
+  document.getElementById('certName').style.top = (lines >= 2 ? '33%' : '36%');
 }
 
 function changeSize(delta) {
