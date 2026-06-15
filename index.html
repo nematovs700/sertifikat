@@ -351,7 +351,7 @@ function buildCanvas(callback) {
     var namePx   = Math.round(nameSize * scale);
     var lineH    = Math.round(namePx * 1.35);
     var totalH   = lineH * lines.length;
-    var centerY  = imgH * 0.33;
+    var centerY  = imgH * (lines.length >= 2 ? 0.33 : 0.36);
     var startY   = centerY - totalH / 2 + namePx / 2;
 
     ctx.save();
