@@ -2122,7 +2122,7 @@ function showTab(id, btn) {
 
 const ovqatState = { swiss: false, jum: false, mt: false, anjum: false };
 const clockState = { swiss: false, jum: false, mt: false, anjum: false };
-const ovqatExtra = { swiss: 160, jum: 200, mt: 160, anjum: 160 };
+const ovqatExtra = { swiss: 160, jum: 200, mt: 160, anjum: 100 };
 
 function recalcPrices(key) {
   const extra = (ovqatState[key] ? ovqatExtra[key] : 0) + (clockState[key] ? 60 : 0);
